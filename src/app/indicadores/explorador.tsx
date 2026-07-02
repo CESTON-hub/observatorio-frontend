@@ -1,21 +1,17 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { categorias, indicadores } from "@/lib/data";
 import { IndicadorCard } from "@/components/cards";
 
 const normalizar = (s: string) =>
   s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
 
-export function ExploradorIndicadores({
-  categoriaInicial,
-  consultaInicial,
-}: {
-  categoriaInicial: string;
-  consultaInicial: string;
-}) {
-  const [categoria, setCategoria] = useState(categoriaInicial);
-  const [consulta, setConsulta] = useState(consultaInicial);
+export function ExploradorIndicadores() {
+  const params = useSearchParams();
+  const [categoria, setCategoria] = useState(params.get("categoria") ?? "todas");
+  const [consulta, setConsulta] = useState(params.get("q") ?? "");
   const [periodo, setPeriodo] = useState("2014–2024");
   const [region, setRegion] = useState("Nacional");
 
