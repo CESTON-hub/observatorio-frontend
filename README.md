@@ -8,6 +8,7 @@ Documentación de arquitectura del proyecto: [CESTON-hub/docs-observatorio](http
 
 - **Next.js 16** (App Router, TypeScript) + **Tailwind CSS v4**
 - **Recharts** para gráficos (sparklines, áreas, barras)
+- **d3-geo + topojson-client** para el mapa de Colombia (proyección Mercator real sobre geometría oficial de departamentos)
 - **DM Sans** (tipografía del diseño) vía `next/font`
 - Datos de demostración en [`src/lib/data.ts`](src/lib/data.ts) — en producción provienen de la API GraphQL definida en el backend-spec
 
@@ -29,6 +30,7 @@ npm run build      # build de producción
 
 ## Notas
 
-- El logo ACIEM en `src/components/AciemLogo.tsx` es una marca provisional — reemplazar por el activo oficial.
-- El mapa de Colombia (`src/components/ColombiaMap.tsx`) usa formas simplificadas por región; en producción se reemplaza por un choropleth con GeoJSON del DANE.
-- Colores de marca: azul `#0c1f3d`, rojo ACIEM `#c41414` (definidos en `src/app/globals.css`).
+- El logo en `src/components/AciemLogo.tsx` es una reconstrucción vectorial del logotipo oficial de ACIEM (dos triángulos rojos + wordmark) — reemplazar por el archivo de marca oficial (SVG/PNG en alta resolución) cuando esté disponible.
+- El mapa de Colombia (`src/components/ColombiaMap.tsx`) usa la geometría oficial de los 33 departamentos (`public/data/colombia-departamentos.json`, TopoJSON simplificado desde el shapefile MGN del DANE) renderizada con `d3-geo` (proyección Mercator ajustada al viewport). Cada departamento se colorea según la cobertura de su región natural (`mapaDepartamentoARegion` en `src/lib/data.ts`); en producción el color vendría por departamento, no por región agregada.
+- Colores de marca: azul `#0c1f3d`, rojo ACIEM `#E30613` (definidos en `src/app/globals.css`).
+- `react-simple-maps` no soporta React 19 todavía (peer dep en 16/17/18) — por eso el mapa usa `d3-geo` + `topojson-client` directamente en vez de ese wrapper.

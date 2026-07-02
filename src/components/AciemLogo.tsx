@@ -1,12 +1,20 @@
-// Marca gráfica provisional inspirada en el logo de ACIEM (triángulos rojos).
-// Reemplazar por el activo oficial de marca antes del lanzamiento.
+// Logotipo oficial de ACIEM: dos triángulos rojos con abertura central
+// y wordmark "ACIEM" en negro, geometría reconstruida como SVG vectorial.
 export function AciemLogo({ className = "" }: { className?: string }) {
   return (
-    <svg viewBox="0 0 40 34" className={className} aria-label="ACIEM">
-      <polygon points="20,0 30,17 10,17" fill="#c41414" />
-      <polygon points="10,17 20,34 0,34" fill="#c41414" />
-      <polygon points="30,17 40,34 20,34" fill="#c41414" />
-      <text x="20" y="31" textAnchor="middle" fontSize="7" fontWeight="700" fill="#fff" fontFamily="inherit">
+    <svg viewBox="0 0 1024 1024" className={className} role="img" aria-label="ACIEM">
+      <polygon points="478,96 64,690 494,690" fill="#E30613" />
+      <polygon points="546,96 960,690 530,690" fill="#E30613" />
+      <text
+        x="512"
+        y="905"
+        textAnchor="middle"
+        fontFamily="var(--font-dm-sans), Arial, sans-serif"
+        fontWeight="800"
+        fontSize="200"
+        letterSpacing="2"
+        fill="#1a1a1a"
+      >
         ACIEM
       </text>
     </svg>

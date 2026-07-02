@@ -81,4 +81,18 @@ export const coberturaRegiones: Record<string, number> = {
   Andina: 99.1, Caribe: 96.4, Pacífico: 89.2, Orinoquía: 91.7, Amazonía: 72.4, Insular: 95.8,
 };
 
+// Asigna cada departamento (DPTO_CNMBR del GeoJSON, public/data/colombia-departamentos.json) a su región natural
+export const mapaDepartamentoARegion: Record<string, string> = {
+  ANTIOQUIA: "Andina", "BOGOTÁ, D.C.": "Andina", BOYACÁ: "Andina", CALDAS: "Andina",
+  CUNDINAMARCA: "Andina", HUILA: "Andina", "NORTE DE SANTANDER": "Andina", QUINDIO: "Andina",
+  RISARALDA: "Andina", SANTANDER: "Andina", TOLIMA: "Andina",
+  ATLÁNTICO: "Caribe", BOLÍVAR: "Caribe", CESAR: "Caribe", CÓRDOBA: "Caribe",
+  "LA GUAJIRA": "Caribe", MAGDALENA: "Caribe", SUCRE: "Caribe",
+  CAUCA: "Pacífico", CHOCÓ: "Pacífico", NARIÑO: "Pacífico", "VALLE DEL CAUCA": "Pacífico",
+  ARAUCA: "Orinoquía", CASANARE: "Orinoquía", META: "Orinoquía", VICHADA: "Orinoquía",
+  AMAZONAS: "Amazonía", CAQUETÁ: "Amazonía", GUAINÍA: "Amazonía", GUAVIARE: "Amazonía",
+  PUTUMAYO: "Amazonía", VAUPÉS: "Amazonía",
+  "ARCHIPIÉLAGO DE SAN ANDRÉS, PROVIDENCIA Y SANTA CATALINA": "Insular",
+};
+
 export const busquedasPopulares = ["Consumo eléctrico", "Energías renovables", "Cobertura nacional", "Petróleo Colombia"];
