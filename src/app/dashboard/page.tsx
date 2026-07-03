@@ -1,6 +1,5 @@
 import Link from "next/link";
-import { indicadores, kpis } from "@/lib/data";
-import { KpiCard } from "@/components/cards";
+import { indicadores } from "@/lib/data";
 import { EnergiaPorRegion, MatrizEnergetica, Sparkline } from "@/components/charts";
 import { ColombiaMap } from "@/components/ColombiaMap";
 import { PanelActores } from "./panel-actores";
@@ -26,14 +25,12 @@ export default function DashboardPage() {
         </div>
       </div>
 
-      {/* KPIs */}
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {kpis.map((k) => (
-          <KpiCard key={k.etiqueta} {...k} />
-        ))}
-      </div>
-
       <PanelActores />
+
+      {/* Referencia sectorial de energía (secundario) */}
+      <p className="mb-3 mt-8 text-xs font-semibold uppercase tracking-[0.1em] text-navy/40">
+        Referencia sectorial: energía e infraestructura nacional
+      </p>
 
       {/* Fila: barras por región + mapa */}
       <div className="mt-6 grid gap-6 lg:grid-cols-[1.6fr_1fr]">
