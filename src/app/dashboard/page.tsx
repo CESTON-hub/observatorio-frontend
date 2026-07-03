@@ -3,6 +3,7 @@ import { indicadores, kpis } from "@/lib/data";
 import { KpiCard } from "@/components/cards";
 import { EnergiaPorRegion, MatrizEnergetica, Sparkline } from "@/components/charts";
 import { ColombiaMap } from "@/components/ColombiaMap";
+import { PanelActores } from "./panel-actores";
 
 export const metadata = { title: "Dashboard · Observatorio de Datos ACIEM" };
 
@@ -31,6 +32,8 @@ export default function DashboardPage() {
           <KpiCard key={k.etiqueta} {...k} />
         ))}
       </div>
+
+      <PanelActores />
 
       {/* Fila: barras por región + mapa */}
       <div className="mt-6 grid gap-6 lg:grid-cols-[1.6fr_1fr]">
