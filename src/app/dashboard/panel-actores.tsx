@@ -3,7 +3,6 @@
 import { useMemo, useState } from "react";
 import {
   PAIS,
-  ciudades,
   municipiosPorCiudad,
   sectoresCiiu,
   ciiusDeSector,
@@ -15,6 +14,7 @@ import {
   type TamanoEmpresa,
   type TipoInstitucion,
 } from "@/lib/actores";
+import { MapaCiudades } from "@/components/MapaCiudades";
 
 function Barra({ nombre, cantidad, total, resaltar }: { nombre: string; cantidad: number; total: number; resaltar?: boolean }) {
   const pct = total > 0 ? Math.round((cantidad / total) * 100) : 0;
@@ -102,30 +102,68 @@ export function PanelActores() {
         )}
       </div>
 
-      {/* Ubicación: País > Ciudad > Municipio */}
-      <div className="mt-4 flex flex-wrap items-center gap-2">
-        <span className="rounded-full bg-navy/8 px-3 py-1.5 text-xs font-semibold text-navy/70">🌎 {PAIS}</span>
-        <span aria-hidden className="text-navy/25">›</span>
-        <select
-          value={ciudad}
-          onChange={(e) => {
-            setCiudad(e.target.value);
-            setMunicipio("");
-          }}
-          className={selectCls}
-        >
-          <option value="">Todas las ciudades</option>
-          {ciudades.map((c) => (
-            <option key={c} value={c}>{c}</option>
-          ))}
-        </select>
-        <span aria-hidden className="text-navy/25">›</span>
-        <select value={municipio} onChange={(e) => setMunicipio(e.target.value)} disabled={!ciudad} className={`${selectCls} disabled:opacity-40`}>
-          <option value="">{ciudad ? "Todos los municipios" : "Selecciona una ciudad primero"}</option>
-          {municipiosDisponibles.map((m) => (
-            <option key={m} value={m}>{m}</option>
-          ))}
-        </select>
+      {/* Ubicación interactiva: País > Ciudad (mapa) > Municipio (chips) */}
+      <div className="mt-4 grid gap-6 md:grid-cols-[320px_1fr]">
+        <div className="rounded-xl border border-black/6 bg-background p-4">
+          <MapaCiudades
+            ciudadSeleccionada={ciudad}
+            onSeleccionarCiudad={(c) => {
+              setCiudad(c);
+              setMunicipio("");
+            }}
+          />
+        </div>
+
+        <div>
+          {/* Breadcrumb de ubicación */}
+          <div className="flex flex-wrap items-center gap-2 text-xs">
+            <span className="rounded-full bg-navy/8 px-3 py-1.5 font-semibold text-navy/70">🌎 {PAIS}</span>
+            <span aria-hidden className="text-navy/25">›</span>
+            <span className={`rounded-full px-3 py-1.5 font-semibold ${ciudad ? "bg-aciem/10 text-aciem" : "bg-black/5 text-navy/45"}`}>
+              {ciudad || "Todas las ciudades"}
+            </span>
+            {municipio && (
+              <>
+                <span aria-hidden className="text-navy/25">›</span>
+                <span className="rounded-full bg-navy px-3 py-1.5 font-semibold text-white">{municipio}</span>
+              </>
+            )}
+          </div>
+
+          {/* Municipios de la ciudad seleccionada */}
+          {ciudad ? (
+            <div className="mt-4">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.1em] text-navy/40">
+                Municipios de {ciudad}
+              </p>
+              <div className="mt-2 flex flex-wrap gap-2">
+                <button
+                  onClick={() => setMunicipio("")}
+                  className={`rounded-full px-3 py-1.5 text-xs font-medium transition-colors ${
+                    municipio === "" ? "bg-navy text-white" : "border border-black/10 text-navy/70 hover:bg-black/5"
+                  }`}
+                >
+                  Todos
+                </button>
+                {municipiosDisponibles.map((m) => (
+                  <button
+                    key={m}
+                    onClick={() => setMunicipio(municipio === m ? "" : m)}
+                    className={`rounded-full px-3 py-1.5 text-xs font-medium transition-colors ${
+                      municipio === m ? "bg-aciem text-white" : "border border-black/10 text-navy/70 hover:bg-black/5"
+                    }`}
+                  >
+                    {m}
+                  </button>
+                ))}
+              </div>
+            </div>
+          ) : (
+            <p className="mt-4 rounded-xl border border-dashed border-black/12 px-4 py-6 text-center text-xs text-navy/45">
+              Selecciona una ciudad en el mapa para elegir un municipio.
+            </p>
+          )}
+        </div>
       </div>
 
       {/* Sector, CIIU y tipo de actor */}

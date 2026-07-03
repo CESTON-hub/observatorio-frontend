@@ -16,6 +16,25 @@ export const municipiosPorCiudad: Record<string, string[]> = {
 
 export const ciudades = Object.keys(municipiosPorCiudad);
 
+// Departamentos (DPTO_CNMBR del GeoJSON) que corresponden a cada ciudad/área.
+// Bogotá incluye Bogotá D.C. y Cundinamarca (municipios del área metropolitana).
+export const departamentosPorCiudad: Record<string, string[]> = {
+  Bogotá: ["BOGOTÁ, D.C.", "CUNDINAMARCA"],
+  Medellín: ["ANTIOQUIA"],
+  Cali: ["VALLE DEL CAUCA"],
+  Barranquilla: ["ATLÁNTICO"],
+  Bucaramanga: ["SANTANDER"],
+};
+
+// Índice inverso: nombre de departamento → ciudad seleccionable.
+export const ciudadPorDepartamento: Record<string, string> = Object.entries(departamentosPorCiudad).reduce(
+  (acc, [ciudad, deptos]) => {
+    for (const d of deptos) acc[d] = ciudad;
+    return acc;
+  },
+  {} as Record<string, string>
+);
+
 export type TamanoEmpresa = "micro" | "pequena" | "mediana" | "grande";
 export type TipoActor = "empresa" | "institucion_educativa" | "gobierno";
 export type TipoInstitucion = "publica" | "privada";
