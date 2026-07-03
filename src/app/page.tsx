@@ -10,11 +10,7 @@ export default function Home() {
       {/* Hero */}
       <section className="bg-navy">
         <div className="mx-auto max-w-[896px] px-6 py-20 text-center">
-          <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.1em] text-white/70">
-            <span className="h-1.5 w-1.5 rounded-full bg-aciem" />
-            Actualizado · Julio 2026
-          </span>
-          <h1 className="mx-auto mt-6 max-w-3xl text-[44px] font-medium leading-[1.1] tracking-[-0.02em] text-white md:text-[52px]">
+          <h1 className="mx-auto max-w-3xl text-[44px] font-medium leading-[1.1] tracking-[-0.02em] text-white md:text-[52px]">
             Datos para entender la ingeniería y la energía en Colombia
           </h1>
           <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-white/55">
