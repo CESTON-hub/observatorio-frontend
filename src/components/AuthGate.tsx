@@ -2,7 +2,7 @@
 
 import { useAuth } from "@/lib/auth";
 import { AuthScreen } from "./AuthScreen";
-import { Nav } from "./Nav";
+import { Sidebar } from "./Sidebar";
 import { Footer } from "./Footer";
 
 export function AuthGate({ children }: { children: React.ReactNode }) {
@@ -18,9 +18,11 @@ export function AuthGate({ children }: { children: React.ReactNode }) {
 
   return (
     <>
-      <Nav />
-      <main className="flex-1">{children}</main>
-      <Footer />
+      <Sidebar />
+      <div className="flex min-h-full flex-col md:ml-64">
+        <main className="flex-1">{children}</main>
+        <Footer />
+      </div>
     </>
   );
 }

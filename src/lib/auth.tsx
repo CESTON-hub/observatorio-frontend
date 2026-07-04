@@ -29,7 +29,7 @@ const SESION_KEY = "aciem_sesion";
 
 const normalizarEmail = (email: string) => email.trim().toLowerCase();
 
-function leerCuentas(): Cuenta[] {
+export function leerCuentas(): Cuenta[] {
   try {
     const raw = localStorage.getItem(CUENTAS_KEY);
     return raw ? (JSON.parse(raw) as Cuenta[]) : [];

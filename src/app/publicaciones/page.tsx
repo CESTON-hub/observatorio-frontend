@@ -1,5 +1,5 @@
-import { boletines } from "@/lib/directorio";
 import { GeneradorPerfil } from "./generador";
+import { ListaBoletines, RedactorBoletin } from "./boletines-cliente";
 
 export const metadata = { title: "Publicaciones · Observatorio de Datos ACIEM" };
 
@@ -28,23 +28,10 @@ export default function PublicacionesPage() {
       {/* Boletines */}
       <div className="mt-6 rounded-2xl border border-black/6 bg-white p-6 shadow-[0_1px_2px_rgba(12,31,61,0.05)]">
         <h2 className="text-sm font-semibold uppercase tracking-[0.1em] text-navy/50">Historial de boletines estadísticos</h2>
-        <ul className="mt-3 divide-y divide-black/5">
-          {boletines.map((b) => (
-            <li key={b.id} className="flex flex-wrap items-center gap-3 py-3">
-              <span className="text-lg">📊</span>
-              <div className="min-w-0 flex-1">
-                <p className="text-sm font-semibold text-navy">{b.titulo}</p>
-                <p className="text-xs text-navy/55">{b.resumen}</p>
-              </div>
-              <span className="text-xs text-navy/45">{b.periodo}</span>
-              <button className="rounded-full border border-black/12 px-3 py-1.5 text-xs font-medium text-navy hover:bg-black/5">
-                Descargar
-              </button>
-            </li>
-          ))}
-        </ul>
+        <ListaBoletines />
       </div>
 
+      <RedactorBoletin />
       <GeneradorPerfil />
     </div>
   );

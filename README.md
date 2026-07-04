@@ -19,16 +19,24 @@ Documentación de arquitectura del proyecto: [CESTON-hub/docs-observatorio](http
 | Pantalla inicial | Login / registro estilo Ramp (`src/components/AuthScreen.tsx`). Bloquea el acceso hasta iniciar sesión o crear cuenta. |
 | `/` | Hero con buscador y búsquedas populares, barra de stats, categorías por sector, indicador destacado con gráfico |
 | `/buscar` | **CU-01** — Buscador de capacidades ("mini-Google"): interpreta la intención (contratar/investigar/financiación/territorio), recomienda entidades rankeadas con justificación y contacto |
-| `/organizaciones/[id]` | **CU-05 + CU-18** — Perfil de organización (capacidades, líneas, proyectos, contacto) con flujo de reclamar perfil censado y confirmar datos vigentes |
+| `/organizaciones/[id]` | **CU-04 + CU-05 + CU-18** — Perfil de organización; el editor puede modificar descripción y capacidades; reclamar perfil censado y confirmar datos vigentes |
 | `/registro` | **CU-03** — Wizard de registro de organización por tipo de actor (5 pasos), termina en la cola de validación |
 | `/indicadores` | **CU-06 + CU-07** — KPIs, filtros, sparklines, búsqueda en vivo y exportación CSV de las series visibles |
-| `/dashboard` | **CU-02** — Resumen ejecutivo: KPIs, barras por región, mapa de cobertura, matriz energética, destacados |
+| `/dashboard` | **CU-02** — Caracterización de actores registrados: mapa interactivo País→Ciudad→Municipio, sector, CIIU y tipo de actor |
 | `/convocatorias` | **CU-19** — Becas, financiación, proyectos e incentivos filtrables por tipo y estado (abierta/cerrada por fecha) |
-| `/publicaciones` | **CU-08 + CU-09** — Marco metodológico, boletines y generador de perfiles territoriales descargables |
+| `/publicaciones` | **CU-08 + CU-09 + CU-13** — Marco metodológico, boletines (+ redactar y publicar uno nuevo) y generador de perfiles territoriales |
 | `/experiencias` | **CU-10** — Banco de buenas prácticas con botones de salto analítico al dashboard |
+| `/interdependencias` | **CU-14** — Grafo de dependencias entre proyectos con alertas heurísticas y resaltado de predecesores/sucesores al pasar el cursor |
+| `/escenarios` | **CU-15** — Simulador de parámetros hipotéticos (presupuesto, personal) con proyección de riesgo y registro de acuerdos |
 | `/admin/validacion` | **CU-11** — Cola de validación human-in-the-loop (rol analista): ítems del autoregistro y del ETL/IA con fuente original y confianza, aprobar/rechazar |
+| `/admin/reglas` | **CU-12** — Configuración de umbrales de alerta (TDP, IEH, CCE) usados en interdependencias |
+| `/admin/administracion` | **CU-16** — Asignación de roles a usuarios registrados y gestión de la taxonomía de sectores |
 
-Los códigos CU-XX corresponden a los casos de uso de [docs-observatorio/docs/arquitectura/casos-de-uso.md](https://github.com/CESTON-hub/docs-observatorio/blob/main/docs/arquitectura/casos-de-uso.md). El directorio de demo y el motor de búsqueda por intención viven en [`src/lib/directorio.ts`](src/lib/directorio.ts); los reclamos, registros y decisiones de validación persisten en `localStorage`.
+Los códigos CU-XX corresponden a los casos de uso de [docs-observatorio/docs/arquitectura/casos-de-uso.md](https://github.com/CESTON-hub/docs-observatorio/blob/main/docs/arquitectura/casos-de-uso.md) — todos están implementados excepto CU-17 (ingerir fuente externa), que es un proceso de backend/ETL sin interfaz de usuario. El directorio de demo y el motor de búsqueda por intención viven en [`src/lib/directorio.ts`](src/lib/directorio.ts); los flujos de gestión (reglas, roles, taxonomías, boletines, escenarios, interdependencias) en [`src/lib/gestion.ts`](src/lib/gestion.ts). Todo persiste en `localStorage`.
+
+## Navegación
+
+La navegación es un **sidebar fijo** a la izquierda en escritorio (`src/components/Sidebar.tsx`), inspirado en el patrón de Stripe Dashboard: marca arriba, enlaces principales, sección colapsable "Gestión" con los flujos de analista/admin, y la tarjeta de usuario abajo. En móvil colapsa a una barra superior con menú hamburguesa que abre un drawer con el mismo contenido.
 
 ## Autenticación (solo frontend)
 
