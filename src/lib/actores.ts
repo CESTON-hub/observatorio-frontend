@@ -18,7 +18,7 @@ export const ciudades = Object.keys(municipiosPorCiudad);
 
 // Departamentos (DPTO_CNMBR del GeoJSON) que corresponden a cada ciudad/área.
 // Bogotá incluye Bogotá D.C. y Cundinamarca (municipios del área metropolitana).
-export const departamentosPorCiudad: Record<string, string[]> = {
+const departamentosPorCiudad: Record<string, string[]> = {
   Bogotá: ["BOGOTÁ, D.C.", "CUNDINAMARCA"],
   Medellín: ["ANTIOQUIA"],
   Cali: ["VALLE DEL CAUCA"],

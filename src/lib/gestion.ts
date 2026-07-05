@@ -157,11 +157,6 @@ export function asignarRol(email: string, rol: Rol) {
   localStorage.setItem(ROLES_KEY, JSON.stringify(r));
 }
 
-export function rolDe(email: string | undefined): Rol {
-  if (!email) return "registrado";
-  return leerRoles()[email] ?? "analista"; // demo: todo usuario autenticado puede actuar como analista
-}
-
 const SECTORES_EXTRA_KEY = "aciem_sectores_extra";
 
 export function leerSectoresExtra(): string[] {
